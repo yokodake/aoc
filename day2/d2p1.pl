@@ -13,6 +13,7 @@ sub main {
 	my $sum=0;
 	open(my $f, '<:encoding(UTF-8)', $_[0]) or die "Could not open test $!";
 	while (my $line = <$f>){
+		# set gt and lt on first number of line
 		my ($gt) = $line =~ /(\d+)/;
 		my $lt = $gt;
 		foreach (split ' ', $line) {
@@ -23,4 +24,3 @@ sub main {
 	}
 	return $sum;
 }
-
