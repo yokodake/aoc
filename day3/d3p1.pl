@@ -31,9 +31,7 @@ sub main {
 		next if ($input > ($n**2)-$_*($n-1));
 		$corner = (($n**2)-$_*($n-1));
 	}
-
 	my $osteps = int($n/2);
 	my $ssteps = abs($corner - $input - int($n/2));
-
 	return $ssteps + $osteps;
 }
