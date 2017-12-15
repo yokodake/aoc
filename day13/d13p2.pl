@@ -4,18 +4,25 @@ use strict;
 use warnings;
 use v5.22;
 
-# test trip severity is 0*3 + 6*4 = 24
+# shortest delay
 my %conn = map {
 	/(^\d+): (\d+)/ or die "failed to map";
 	$1 => $2;
 } <>;
 
-my $severity = 0;
-for (keys %conn) {
-	$severity += $_ * $conn{$_} if(get_idx($_, $conn{$_}) == 0);
+my $d = 0;
+while(1) {
+	last if(pass($d++));
 }
-say $severity;
+say $d-1;
 
+sub pass {
+	my $delay = shift;
+	for (keys %conn) {
+		return 0 if(get_idx($_+$delay, $conn{$_}) == 0);
+	}
+	return 1;
+}
 sub get_idx {
 	my $depth = shift;
 	my $range = shift;
