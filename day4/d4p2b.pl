@@ -5,21 +5,13 @@ use warnings;
 use 5.022;
 
 my ($total, $invalid) = (0, 0);
-
-sub sort_string {
-	return join "", sort split //, $_[0];
-}
-
 while(my $line = <>) {
 	chomp $line;
-	my @words = sort map { sort_string($_) } split / /, $line;
-	for(my $i = 0; $i < @words - 1; $i++) {
-		if($words[$i] eq $words[$i+1]) {
-			$invalid++;
-			last;
-		}
+	my @words = sort map { join "", sort split //, $_ } split / /, $line;
+	for(0 .. $#words-1) {
+		++$invalid && last if $words[$_] eq $words[$_+1];
 	}
 	$total++;
 }
 
-say "valid: ", $total - $invalid;
+say "part2: ", $total - $invalid;

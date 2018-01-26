@@ -31,7 +31,5 @@ sub prog_hash {
 	return 0 if (exists $pipes{$parent});
 	
 	$pipes{$parent}++;
-	for(@{$childs{$parent}}) {
-		prog_hash($_);
-	}
+	prog_hash($_) for(@{$childs{$parent}});
 }

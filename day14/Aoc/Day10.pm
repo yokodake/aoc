@@ -2,28 +2,15 @@
 
 use strict;
 use warnings;
-use v5.22;
+
+use Exporter qw(import);
+
+our @EXPORT_OK = qw(knot_hash);
 
 my @list;
 my @len_list;
 
-my %tests = ( '' => 'a2582a3a0e66e6e86e3812dcb672a272',
-		   'AoC 2017' => '33efeb34ea91902bb2f59c9920caa6cd',
-		   '1,2,3' => '3efbe78a8d82f29979031a4aa0b16a9d', 
-		   '1,2,4' => '63960835bcdc130f0b66d7ff4f6a5a8e');
-
-
-if(scalar @ARGV && $ARGV[0] eq 'test') { 
-	for(keys %tests) {
-		my $result = main($_);
-		say "\"$_\" ($result)" if($result ne $tests{$_});
-	}
-} else { 
-	say main(<>);
-}
-
-
-sub main {
+sub knot_hash {
 	my $idx = 0;
 	my $skip = 0;
 	my $input = shift;
@@ -99,3 +86,5 @@ sub make_len {
 	push @len_list, (17,31,73,47,23);
 	return @len_list;
 }
+
+1;

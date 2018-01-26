@@ -52,3 +52,5 @@ sub add_programs {
 		add_programs($_, $pipe_r);
 	}
 }
+
+$hash{'val'} = "my value";

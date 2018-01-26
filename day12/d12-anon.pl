@@ -31,5 +31,5 @@ for(sort keys %conn){
     
     investigate $_,$ref;
     $groupCount++;
-}    
+}
 say "Part 2: " . $groupCount;
