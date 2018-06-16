@@ -1,59 +1,43 @@
 #!/usr/bin/perl
-
-use strict;
 use warnings;
-use v5.22;
+use strict;
+use v5.26;
 
 use File::Basename qw(dirname);
-use Cwd qw(abs_path);
+use Cwd  qw(abs_path);
 use lib dirname(dirname abs_path $0);
 
-use Aoc::Day10 qw(knot_hash);
+use My::KHash qw(knot_hash);
+use List::Util qw(reduce);
 
-use Inline 'C' => Config => BUILD_NOISY => 1, CLEAN_AFTER_BUILD => 0;
-use Inline 'C' => <<'END_C';
+my $test = main("flqrgnkx");
+die "Test failed. Actual : $test" if ($test != 8108);
+say "Test succeeded.";
+print main("ugkiagan");
 
-#include <stdint.h>
-
-unsigned popcnt2( SV *sv ) {
-    unsigned count = 0;
-
-    #ifdef __LP64__
-        static const uint64_t m1  = UINT64_C(0x5555555555555555);
-        static const uint64_t m2  = UINT64_C(0x3333333333333333);
-        static const uint64_t m4  = UINT64_C(0x0f0f0f0f0f0f0f0f);
-        static const uint64_t h01 = UINT64_C(0x0101010101010101);
-
-        uint64_t x = (uint64_t) SvUVX( sv );
-
-        x =  x       - ((x >> 1)  & m1);
-        x = (x & m2) + ((x >> 2)  & m2);
-        x = (x       +  (x >> 4)) & m4;
-
-        count += (unsigned) ((x * h01) >> 56);
-    #else
-        static const uint32_t m1  = UINT32_C(0x55555555);
-        static const uint32_t m2  = UINT32_C(0x33333333);
-        static const uint32_t m4  = UINT32_C(0x0f0f0f0f);
-        static const uint32_t h01 = UINT32_C(0x01010101);
-
-        uint32_t x = (uint32_t) SvUVX( sv );
-
-        x =  x       - ((x >> 1)  & m1);
-        x = (x & m2) + ((x >> 2)  & m2);
-        x = (x       +  (x >> 4)) & m4;
-
-        count += (unsigned) ((x * h01) >> 24);
-    #endif
-
-    return count;
+# step 1 : make the array
+# mk arr
+sub inputArr {
+    my ($in) = @_;
+    return map { "$in-$_" } @{[0..127]};
 }
 
-END_C
+# step 2 : convert to binary
+sub convert {
+    my ($in) = @_;
+    my @arr = map { sprintf "%04b", hex } split //, $in;
+    return join "", @arr;
+}
+# step 3 : count
+sub count {
+    my @linecounts = map { $_ =~ tr/1// } @_;
+    return reduce { $a + $b } @linecounts;
+}
 
-my $input = shift;
-
-my $hash = knot_hash($input);
-say $hash;
-
-say popcnt2(hex substr $hash, $_*8, 8) for(0..3);
+# step 4 : compose
+sub main {
+    my ($in) = @_;
+    my @knots = map { knot_hash($_) } inputArr($in);
+    my @bins = map { convert($_) } @knots;
+    return count(@bins);
+}
