@@ -7,4 +7,4 @@ import qualified Day17
 
 main :: IO ()
 main = do
-  Day16.main
+  Day17.main
