@@ -2,7 +2,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE LambdaCase #-}
 
-module Day16b where
+module Day16 where
 
 import Data.List (foldl')
 import Data.Map.Strict (Map(..))
