@@ -1,7 +1,0 @@
-Configuring deepseq-1.4.3.0...
-Preprocessing library for deepseq-1.4.3.0..
-Building library for deepseq-1.4.3.0..
-[1 of 2] Compiling Control.DeepSeq  ( Control/DeepSeq.hs, .stack-work/dist/x86_64-linux-ncurses6/Cabal-2.0.1.0/build/Control/DeepSeq.o )
-[2 of 2] Compiling Control.DeepSeq.BackDoor ( Control/DeepSeq/BackDoor.hs, .stack-work/dist/x86_64-linux-ncurses6/Cabal-2.0.1.0/build/Control/DeepSeq/BackDoor.o )
-Installing library in /home/ngyj/code/perl/aoc17/day155/.stack-work/install/x86_64-linux-ncurses6/lts-11.13/8.2.2/lib/x86_64-linux-ghc-8.2.2/deepseq-1.4.3.0-6UX13Sjqm2ZDWhcBloEZA
-Registering library for deepseq-1.4.3.0..
