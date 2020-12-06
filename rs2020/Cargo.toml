@@ -1,0 +1,13 @@
+[package]
+name = "rs2020"
+version = "0.1.0"
+authors = ["yokodake <ngyj@cinnabar.fr>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[[bin]]
+name = "d3"
+path = "src/d3.rs"
