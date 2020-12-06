@@ -13,6 +13,7 @@ let
 
     #use "topfind";;
     #thread;;
+    #require "batteries";;
   '';
 in
 mkShell rec {
