@@ -21,13 +21,16 @@ mkShell rec {
     dune
   ] ++ ( with ocamlPackages;
   [
-    ocaml
-    core
-    batteries
+    ocaml # contains ocamllex
     findlib
     utop
     merlin
     ocp-indent
+
+    core
+    batteries
+
+    menhir
   ]);
   IN_NIX_SHELL = 1;
   UTOP_SITE_LISP = "${ocamlPackages.utop}/share/emacs/site-lisp";

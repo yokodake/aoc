@@ -1,0 +1,9 @@
+(ocamllex lex)
+(menhir
+  (flags --explain)
+  (modules parse))
+
+(executable
+  (name main)
+  (flags -warn-error -a)
+  (libraries batteries))
